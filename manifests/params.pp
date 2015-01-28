@@ -27,4 +27,5 @@ class beaver::params {
   $sincedb_path           = '/tmp/beaver_since.db'
   $multiline_regex_after  = ''
   $multiline_regex_before = ''
+  $proxy                  = false
 }

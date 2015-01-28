@@ -21,6 +21,7 @@ class beaver::package (
   $user           = $beaver::user,
   $group          = $beaver::group,
   $home           = $beaver::home,
+  $proxy          = $beaver::proxy
 ) {
 
   if $caller_module_name != $module_name {
@@ -59,15 +60,16 @@ class beaver::package (
       system     => true,
     }
   } elsif $provider == 'pip' {
-    python::pip { $package_name:
+    python::pip { $package_name_beaver_module:
       ensure     => present,
       pkgname    => $package_name,
       virtualenv => 'system',
       owner      => 'root',
+      proxy      => $proxy,
       require    => User[$user],
       notify     => Class['beaver::service'],
     }
-    
+
     user { $user:
       ensure     => present,
       home       => $home,
