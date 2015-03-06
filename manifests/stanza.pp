@@ -33,6 +33,16 @@
 #   String/Array of strings.  Valid python regex strings to exlude
 #   from file globs.
 #
+# [*multiline_regex_after*]
+#   String. regex to identify lines that need to be considered as part of a 
+#   so if a line is followed by a line that ends with 1 or more spaces these
+#   two line will be considered a multiline statement 
+#
+# [*multiline_regex_before*]
+#   String. regex to identify lines that need to be considered as part of a 
+#   so if a line is followed by a line that starts with 1 or more spaces these
+#   two line will be considered a multiline statement 
+#
 # === Authors
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
@@ -46,6 +56,8 @@ define beaver::stanza (
   $format                 = '',
   $exclude                = [],
   $sincedb_write_interval = 300,
+  $multiline_regex_after  = '',
+  $multiline_regex_before = ''
 ){
 
   $source_real = $source ? {
